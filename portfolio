@@ -435,3 +435,52 @@
 </script>
 </body>
 </html>
+
+# Your Name: Project Portfolio
+
+Hands-on aerospace and engineering projects: aircraft built from foam board, satellite hardware, competition builds, and a learning app.
+
+**Live site:** `https://YOUR-USERNAME.github.io/REPO-NAME/` (see [Publishing](#publishing))
+
+## Projects
+
+| Project | What it is | Highlights |
+|---|---|---|
+| [RC Jet](projects/rc-jet/) | Scratch-built jet on a 70 mm ducted fan | Fusion 360 design, researched exhaust sizing, gyro stabilization, controlled flight |
+| [RC Aircraft Series](projects/rc-aircraft-series/) | Foam-board aircraft, first build to F-22 replica | 3-axis gyro, wooden-spar wing, F-22 replica with elevons |
+| [SmallSat Biological Payload](projects/smallsat-biological-payload/) | Payload for a CubeSat team | Fruit fly survival research, UV-blocking and UV-absorbing design |
+| [SECME Olympiad](projects/secme/) | Mousetrap car and hydro-powered generator | 1st of 50 schools (SDPBC), 3rd nationally, 3rd with generator in 2026 |
+| [Phonix](projects/phonix-app/) | AI phonics app, MIT FutureMakers | Create-a-thon finalist |
+
+## Repo layout
+
+```
+index.html              the portfolio website (GitHub Pages serves this)
+projects/
+  <project>/
+    README.md           write-up for that project
+    images/             photos, CAD, and drawings used by the README and the site
+.nojekyll               tells GitHub Pages to serve files as-is
+```
+
+The website and the READMEs share the same images, so a photo you add once appears in both.
+
+## Publishing
+
+1. Create a new repository on GitHub (for example `portfolio`).
+2. Upload these files, or from this folder run:
+   ```bash
+   git init
+   git add .
+   git commit -m "Add project portfolio"
+   git branch -M main
+   git remote add origin https://github.com/YOUR-USERNAME/portfolio.git
+   git push -u origin main
+   ```
+3. In the repo, open **Settings > Pages**, set **Source** to *Deploy from a branch*, choose `main` and `/ (root)`, and save.
+4. After a minute the site is live at `https://YOUR-USERNAME.github.io/portfolio/`. Name the repo `YOUR-USERNAME.github.io` to get the shorter `https://YOUR-USERNAME.github.io/` instead.
+
+## Personalizing
+
+- In `index.html`, replace `Your Name`, the email address, and the GitHub link (search for `YOUR-`).
+- In each project README, fill in the `<!-- Add: ... -->` prompts with numbers and details only you know.
