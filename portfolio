@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Your Name · Project Portfolio</title>
+<meta name="description" content="Scratch-built RC aircraft, a ducted-fan jet, a CubeSat biological payload, SECME competition builds, and an AI phonics app.">
+<meta property="og:title" content="Your Name · Project Portfolio">
+<meta property="og:description" content="Scratch-built RC aircraft, a ducted-fan jet, a CubeSat biological payload, SECME competition builds, and an AI phonics app.">
+<meta property="og:image" content="projects/rc-jet/images/jet-photo.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    color-scheme: light;
+    --paper: #f4f5f2;
+    --sheet: #ffffff;
+    --ink: #1c1f26;
+    --ink-soft: #4b515c;
+    --rule: #cfd6db;
+    --lead: #c8372d;      /* servo-lead red: used for links, marks and focus only */
+    --head: "Barlow Condensed", "Arial Narrow", "Helvetica Neue", sans-serif;
+    --body: "Source Serif 4", Georgia, "Times New Roman", serif;
+    --gap: clamp(1rem, 2.4vw, 1.75rem);
+    --wrap: 72rem;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 1rem; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font: 400 1.0625rem/1.65 var(--body);
+    -webkit-font-smoothing: antialiased;
+  }
+  img { display: block; max-width: 100%; height: auto; }
+  a { color: var(--ink); text-decoration-color: var(--lead); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+  a:hover { color: var(--lead); }
+  :focus-visible { outline: 3px solid var(--lead); outline-offset: 3px; }
+
+  .wrap { width: min(100% - 2rem, var(--wrap)); margin-inline: auto; }
+
+  /* ---------- top bar ---------- */
+  .bar { border-bottom: 1px solid var(--rule); background: var(--paper); }
+  .bar .wrap { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: .5rem 1.5rem; padding-block: 1rem; }
+  .brand { font: 700 1.5rem/1 var(--head); letter-spacing: .01em; text-decoration: none; }
+  .bar nav { display: flex; flex-wrap: wrap; gap: .25rem 1.25rem; font: 500 1.0625rem/1.2 var(--head); }
+  .bar nav a { text-decoration: none; padding-block: .25rem; border-bottom: 2px solid transparent; }
+  .bar nav a:hover { border-bottom-color: var(--lead); color: var(--ink); }
+
+  /* ---------- hero ---------- */
+  .hero { padding-block: clamp(2rem, 6vw, 4.5rem); }
+  .hero .wrap { display: grid; gap: clamp(1.5rem, 4vw, 3.5rem); grid-template-columns: 1fr; align-items: center; }
+  @media (min-width: 52rem) { .hero .wrap { grid-template-columns: 1.25fr 1fr; } }
+  .hero h1 { font: 700 clamp(2.75rem, 7vw, 5rem)/.98 var(--head); letter-spacing: -.005em; margin: 0 0 1.25rem; max-width: 13ch; }
+  .hero .lede { font-size: 1.25rem; line-height: 1.55; max-width: 34em; margin: 0 0 2rem; color: var(--ink-soft); }
+
+  .index { margin: 0; padding: 0; list-style: none; border-top: 2px solid var(--ink); max-width: 36rem; }
+  .index li { border-bottom: 1px solid var(--rule); }
+  .index a { display: flex; justify-content: space-between; gap: 1rem; align-items: baseline; padding: .6rem .1rem; text-decoration: none; }
+  .index a:hover { color: var(--ink); background: #fff; }
+  .index .t { font: 600 1.25rem/1.2 var(--head); white-space: nowrap; }
+  .index .d { font-size: .95rem; color: var(--ink-soft); text-align: right; line-height: 1.35; }
+  @media (max-width: 34rem) { .index a { flex-direction: column; gap: .1rem; } .index .d { text-align: left; } }
+
+  .hero-fig { margin: 0; justify-self: center; width: min(100%, 26rem); }
+  .hero-fig .frame { background: var(--sheet); border: 1px solid var(--ink); padding: .6rem; }
+  .hero-fig img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; }
+  /* dimension line: caption sits between two end ticks, like a drawing callout */
+  .dim { position: relative; margin-top: 1rem; padding-top: .55rem; text-align: center; font: 500 1rem/1.2 var(--head); color: var(--ink-soft); }
+  .dim::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 9px; border-left: 1.5px solid var(--ink); border-right: 1.5px solid var(--ink); background: linear-gradient(var(--ink), var(--ink)) center 4px / 100% 1.5px no-repeat; }
+  .dim span { display: inline-block; background: var(--paper); padding-inline: .6rem; position: relative; top: -.1rem; }
+
+  /* ---------- project sheets ---------- */
+  main { padding-bottom: 3rem; }
+  .sheet { background: var(--sheet); border: 1.5px solid var(--ink); margin-block: clamp(2rem, 5vw, 3.5rem); }
+  .sheet > header { padding: clamp(1.25rem, 3vw, 2rem) clamp(1.25rem, 3vw, 2.25rem) 0; }
+  .sheet h2 { font: 700 clamp(2rem, 4.5vw, 3rem)/1 var(--head); margin: 0 0 .6rem; }
+  .sheet header p { margin: 0; max-width: 40em; color: var(--ink-soft); font-size: 1.125rem; }
+
+  .row { display: grid; gap: var(--gap); grid-template-columns: 1fr; padding: clamp(1.25rem, 3vw, 2.25rem); }
+  .row + .row { border-top: 1px solid var(--rule); }
+  @media (min-width: 52rem) {
+    .row { grid-template-columns: 5fr 7fr; align-items: start; }
+    .row.stack { grid-template-columns: 1fr; }
+  }
+  .row h3 { font: 600 1.5rem/1.1 var(--head); margin: 0 0 .6rem; }
+  .row p { margin: 0 0 1rem; }
+  .row p:last-child { margin-bottom: 0; }
+  .row ul { margin: 0; padding-left: 1.15rem; }
+  .row li { margin-bottom: .45rem; padding-left: .2rem; }
+  .row li::marker { color: var(--lead); }
+
+  .exhaust { display: grid; grid-template-columns: 1fr 7.5rem; gap: 1rem; align-items: start; }
+  .exhaust figure { margin: 0; }
+  .row.stack .text { display: grid; gap: var(--gap); }
+  @media (min-width: 52rem) { .row.stack .text { grid-template-columns: 1fr 1fr; } }
+
+  /* galleries */
+  .gallery { display: grid; gap: var(--gap); grid-template-columns: repeat(6, 1fr); align-items: start; }
+  .gallery figure { margin: 0; grid-column: span 3; }
+  .gallery .s2 { grid-column: span 2; }
+  .gallery .s4 { grid-column: span 4; }
+  .gallery .s6 { grid-column: span 6; }
+  @media (max-width: 40rem) {
+    .gallery figure, .gallery .s2 { grid-column: span 3; }
+    .gallery .s4, .gallery .s6 { grid-column: span 6; }
+  }
+  .zoom { display: block; width: 100%; padding: 0; border: 1px solid var(--rule); background: var(--paper); cursor: zoom-in; font: inherit; }
+  .zoom:hover { border-color: var(--ink); }
+  .zoom img { width: 100%; }
+  figcaption { font: 500 1rem/1.25 var(--head); color: var(--ink-soft); margin-top: .4rem; }
+  .diagram .zoom { background: #fff; }
+  .logo-tile .zoom { background: #fff; padding: 1.5rem; }
+
+  /* title block, borrowed from the corner of a technical drawing */
+  .titleblock { margin: 0; display: grid; grid-template-columns: repeat(2, 1fr); border-top: 1.5px solid var(--ink); }
+  @media (min-width: 52rem) { .titleblock { grid-template-columns: 1.1fr 1.4fr 1.6fr .8fr; } }
+  .titleblock > div { padding: .8rem 1rem 1rem; border-right: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+  .titleblock > div:nth-child(2n) { border-right: 0; }
+  @media (min-width: 52rem) {
+    .titleblock > div { border-bottom: 0; }
+    .titleblock > div:nth-child(2n) { border-right: 1px solid var(--rule); }
+    .titleblock > div:last-child { border-right: 0; }
+  }
+  .titleblock dt { font: 500 .9rem/1.2 var(--head); letter-spacing: .02em; color: var(--ink-soft); margin-bottom: .2rem; }
+  .titleblock dd { margin: 0; font-size: 1rem; line-height: 1.4; }
+
+  /* ---------- footer ---------- */
+  footer { border-top: 2px solid var(--ink); padding-block: 2.5rem 3.5rem; }
+  footer .wrap { display: flex; flex-wrap: wrap; gap: 1.5rem 3rem; justify-content: space-between; align-items: end; }
+  footer h2 { font: 700 2.25rem/1 var(--head); margin: 0 0 .5rem; }
+  footer p { margin: 0; color: var(--ink-soft); }
+  footer ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 1.5rem; font: 600 1.25rem/1 var(--head); }
+
+  /* ---------- lightbox ---------- */
+  dialog { border: 1.5px solid var(--ink); padding: 0; max-width: min(92vw, 70rem); max-height: 92vh; background: var(--sheet); overflow: auto; }
+  dialog::backdrop { background: rgba(20, 22, 28, .78); }
+  dialog img { max-height: 78vh; width: auto; margin-inline: auto; }
+  dialog .cap { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: .7rem 1rem; border-top: 1px solid var(--rule); font: 500 1.0625rem/1.3 var(--head); }
+  dialog button { font: 600 1rem/1 var(--head); padding: .5rem .9rem; border: 1.5px solid var(--ink); background: var(--sheet); color: var(--ink); cursor: pointer; }
+  dialog button:hover { background: var(--ink); color: #fff; }
+
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  @media print { .bar nav, dialog { display: none; } .sheet { break-inside: avoid; } }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <div class="wrap">
+    <a class="brand" href="#top">Your Name</a>
+    <nav aria-label="Projects">
+      <a href="#rc-jet">RC Jet</a>
+      <a href="#rc-aircraft">RC Aircraft</a>
+      <a href="#smallsat">SmallSat</a>
+      <a href="#secme">SECME</a>
+      <a href="#phonix">Phonix</a>
+    </nav>
+  </div>
+</div>
+
+<section class="hero" id="top">
+  <div class="wrap">
+    <div>
+      <h1>I design and build aircraft from scratch.</h1>
+      <p class="lede">Foam-board RC planes, a 70&nbsp;mm ducted-fan jet, and a payload for a CubeSat team’s SmallSat. I model in Fusion&nbsp;360, wire the electronics, and program the gyros that keep everything level.</p>
+      <ul class="index" aria-label="Project index">
+        <li><a href="#rc-jet"><span class="t">RC Jet</span><span class="d">Scratch-built, 70 mm ducted fan, controlled flight</span></a></li>
+        <li><a href="#rc-aircraft"><span class="t">RC Aircraft Series</span><span class="d">From a 1-servo first build to an F-22 replica</span></a></li>
+        <li><a href="#smallsat"><span class="t">SmallSat Biological Payload</span><span class="d">Fruit fly payload with UV-blocking parts</span></a></li>
+        <li><a href="#secme"><span class="t">SECME Olympiad</span><span class="d">1st of 50 schools, 3rd nationally</span></a></li>
+        <li><a href="#phonix"><span class="t">Phonix</span><span class="d">AI phonics app, Create-a-thon finalist</span></a></li>
+      </ul>
+    </div>
+    <figure class="hero-fig">
+      <div class="frame">
+        <img src="projects/rc-jet/images/jet-photo.jpg" width="1200" height="1600" alt="White foam-board RC jet with a black canopy, sitting on a tile floor">
+      </div>
+      <figcaption class="dim"><span>RC jet, foam board and a 70 mm ducted fan</span></figcaption>
+    </figure>
+  </div>
+</section>
+
+<main class="wrap">
+
+  <!-- ===================== RC JET ===================== -->
+  <article class="sheet" id="rc-jet">
+    <header>
+      <h2>RC Jet</h2>
+      <p>A radio-controlled jet built from scratch around a 70&nbsp;mm electric ducted fan. Foam boards and hobbyist electronics, no kits.</p>
+    </header>
+    <div class="row stack">
+      <div class="text">
+        <div>
+          <h3>What I did</h3>
+          <ul>
+            <li>Built the airframe from foam boards and hobbyist electronics.</li>
+            <li>Designed the aircraft and its exit tube in Autodesk Fusion 360.</li>
+            <li>Implemented a gyroscope that stabilizes the plane during flight.</li>
+            <li>Maintained controlled flight.</li>
+          </ul>
+        </div>
+        <div class="exhaust">
+          <div>
+            <h3>Sizing the exhaust</h3>
+            <p>Thrust depends on how the exit tube is sized against the fan. I researched intake and exit diameters for maximum thrust, compared options in an exit-diameter calculator, then modeled the tube in Fusion 360 and drew it up.</p>
+          </div>
+          <figure class="zoomable diagram"><button class="zoom" type="button"><img src="projects/rc-jet/images/exhaust-model.png" width="304" height="625" loading="lazy" alt="3D model of the tapered exhaust tube"></button><figcaption>Tube model</figcaption></figure>
+        </div>
+      </div>
+      <div class="gallery diagram">
+        <figure class="zoomable"><button class="zoom" type="button"><img src="projects/rc-jet/images/jet-cad.png" width="728" height="528" loading="lazy" alt="Fusion 360 model of the jet, dark gray with wings, tail, and internal fan housing"></button><figcaption>Fusion 360 model</figcaption></figure>
+        <figure class="zoomable"><button class="zoom" type="button"><img src="projects/rc-jet/images/jet-drawing.png" width="955" height="621" loading="lazy" alt="Multi-view technical drawing of the RC jet with dimensions"></button><figcaption>Multi-view drawing</figcaption></figure>
+        <figure class="zoomable"><button class="zoom" type="button"><img src="projects/rc-jet/images/exhaust-calculator.png" width="1268" height="803" loading="lazy" alt="Exhaust exit diameter calculator listing exit diameters for single and dual outlets at different area percentages"></button><figcaption>Exit-diameter calculator</figcaption></figure>
+        <figure class="zoomable"><button class="zoom" type="button"><img src="projects/rc-jet/images/exhaust-drawing.png" width="1064" height="669" loading="lazy" alt="Technical drawing of the tapered exhaust tube"></button><figcaption>Exhaust tube drawing</figcaption></figure>
+      </div>
+    </div>
+    <dl class="titleblock">
+      <div><dt>Role</dt><dd>Designer and builder</dd></div>
+      <div><dt>Tools</dt><dd>Fusion 360, foam board, hobbyist electronics</dd></div>
+      <div><dt>Outcome</dt><dd>Controlled flight with gyro stabilization</dd></div>
+      <div><dt>Write-up</dt><dd><a href="https://github.com/YOUR-USERNAME/YOUR-REPO/tree/main/projects/rc-jet">On GitHub</a></dd></div>
+    </dl>
+  </article>
+
+  <!-- ===================== RC AIRCRAFT SERIES ===================== -->
+  <article class="sheet" id="rc-aircraft">
+    <header>
+      <h2>RC Aircraft Series</h2>
+      <p>Every build from scratch with foam board and hobbyist electronics, each one lighter and easier to work on than the last.</p>
+    </header>
+
+    <div class="row">
+      <div>
+        <h3>First aircraft</h3>
+        <ul>
+          <li>Integrated a 1-servo aileron control system.</li>
+          <li>Programmed a gyro that makes real-time corrections on three axes: roll, pitch, and yaw.</li>
+        </ul>
+      </div>
+      <div class="gallery">
+        <figure class="zoomable"><button class="zoom" type="button"><img src="projects/rc-aircraft-series/images/first-aircraft.jpg" width="1200" height="1600" loading="lazy" alt="First RC aircraft, a white foam-board plane with a wide wing, held against a blue painted backdrop"></button><figcaption>First aircraft</figcaption></figure>
+      </div>
+    </div>
+
+    <div class="row">
+      <div>
+        <h3>Later and improved models</h3>
+        <p>Versions 2 and 3.</p>
+        <ul>
+          <li>Efficient access to the electronics.</li>
+          <li>Tail wheel layout.</li>
+          <li>Gyro implemented.</li>
+          <li>Lightest construction using hobbyist electronics and foam board.</li>
+          <li>Improved wing structure using a wooden spar and a streamlined airfoil.</li>
+        </ul>
+      </div>
+      <div class="gallery">
+        <figure class="zoomable s2"><button class="zoom" type="button"><img src="projects/rc-aircraft-series/images/later-model-a.jpg" width="1200" height="1600" loading="lazy" alt="White foam-board plane with a black-paneled cockpit and tail wheel, seen from above on a tile floor"></button><figcaption>Tail-wheel model</figcaption></figure>
+        <figure class="zoomable s4"><button class="zoom" type="button"><img src="projects/rc-aircraft-series/images/later-model-b.jpg" width="1600" height="1052" loading="lazy" alt="White foam-board plane with a rounded wing and tail, resting on a tile floor in sunlight"></button><figcaption>Rounded-wing model</figcaption></figure>
+      </div>
+    </div>
+
+    <div class="row">
+      <div>
+        <h3>F-22 Raptor replica</h3>
+        <ul>
+          <li>Black foam-board replica of the F-22.</li>
+          <li>Uses an elevon control system.</li>
+        </ul>
+      </div>
+      <div class="gallery">
+        <figure class="zoomable"><button class="zoom" type="button"><img src="projects/rc-aircraft-series/images/f22-side.jpg" width="1200" height="1600" loading="lazy" alt="Black foam-board F-22 replica with twin tails on a concrete floor"></button><figcaption>Side view</figcaption></figure>
+        <figure class="zoomable"><button class="zoom" type="button"><img src="projects/rc-aircraft-series/images/f22-top.jpg" width="1200" height="1600" loading="lazy" alt="Top view of the black F-22 replica showing its delta wings and twin tails"></button><figcaption>Top view</figcaption></figure>
+      </div>
+    </div>
+
+    <dl class="titleblock">
+      <div><dt>Role</dt><dd>Designer and builder</dd></div>
+      <div><dt>Tools</dt><dd>Foam board, hobbyist electronics, gyro</dd></div>
+      <div><dt>Outcome</dt><dd>Gyro-stabilized builds across multiple versions</dd></div>
+      <div><dt>Write-up</dt><dd><a href="https://github.com/YOUR-USERNAME/YOUR-REPO/tree/main/projects/rc-aircraft-series">On GitHub</a></dd></div>
+    </dl>
+  </article>
+
+  <!-- ===================== SMALLSAT ===================== -->
+  <article class="sheet" id="smallsat">
+    <header>
+      <h2>Biological Payload for SmallSat</h2>
+      <p>The payload for a SmallSat affiliated with the Wolfpack CubeSat Development Team.</p>
+    </header>
+    <div class="row">
+      <div>
+        <ul>
+          <li>Researched how fruit flies survive in stratospheric conditions.</li>
+          <li>Was tasked with designing the biological payload.</li>
+          <li>Designed it in Autodesk Fusion 360.</li>
+          <li>Integrated both the UV-blocking and UV-absorbing components, using acrylic and quartz glass.</li>
+        </ul>
+      </div>
+      <div class="gallery diagram">
+        <figure class="zoomable s6"><button class="zoom" type="button"><img src="projects/smallsat-biological-payload/images/payload-cad.png" width="812" height="556" loading="lazy" alt="Fusion 360 model of the payload: a glass-walled chamber on a base, next to its mounting tray with corner posts"></button><figcaption>Payload chamber and mounting tray in Fusion 360</figcaption></figure>
+      </div>
+    </div>
+    <dl class="titleblock">
+      <div><dt>Role</dt><dd>Biological payload designer</dd></div>
+      <div><dt>Tools</dt><dd>Fusion 360, acrylic, quartz glass</dd></div>
+      <div><dt>Focus</dt><dd>Fruit fly survival in stratospheric conditions</dd></div>
+      <div><dt>Write-up</dt><dd><a href="https://github.com/YOUR-USERNAME/YOUR-REPO/tree/main/projects/smallsat-biological-payload">On GitHub</a></dd></div>
+    </dl>
+  </article>
+
+  <!-- ===================== SECME ===================== -->
+  <article class="sheet" id="secme">
+    <header>
+      <h2>SECME Olympiad</h2>
+      <p>Engineering builds for SECME: Science, Engineering, Communications, Math, and Enrichment.</p>
+    </header>
+
+    <div class="row">
+      <div>
+        <h3>Mousetrap car</h3>
+        <p>First out of 50 high schools at the SDPBC SECME Olympiad, and third at the National SECME Olympiad at the University of Florida.</p>
+        <ul>
+          <li>Met weekly after school to design technical drawings and prototypes.</li>
+          <li>Integrated gears to cover more distance.</li>
+          <li>Built only from recycled and donated materials.</li>
+        </ul>
+      </div>
+      <div class="gallery">
+        <figure class="zoomable s2"><button class="zoom" type="button"><img src="projects/secme/images/mousetrap-car-top.jpg" width="1200" height="1600" loading="lazy" alt="Mousetrap car from above: a wooden frame with blue tape, two white front wheels and a CD as a rear wheel"></button><figcaption>Top view</figcaption></figure>
+        <figure class="zoomable s4"><button class="zoom" type="button"><img src="projects/secme/images/mousetrap-car-side.jpg" width="1200" height="660" loading="lazy" alt="Side view of the mousetrap car on a black lab bench, long frame with a large CD rear wheel"></button><figcaption>Side view</figcaption></figure>
+      </div>
+    </div>
+
+    <div class="row">
+      <div>
+        <h3>Hydro-powered generator</h3>
+        <p>Third place at the 2026 SDPBC SECME Olympiad.</p>
+        <ul>
+          <li>Assisted in prototyping and producing technical drawings.</li>
+          <li>Used Faraday’s law to maximize voltage.</li>
+          <li>Designed and implemented a 4-magnet apparatus to optimize magnetic flux generation.</li>
+        </ul>
+      </div>
+      <div class="gallery">
+        <figure class="zoomable s2"><button class="zoom" type="button"><img src="projects/secme/images/generator-front.jpg" width="1200" height="1600" loading="lazy" alt="Hand holding the generator: a green frame with a large yellow gear and a smaller green gear"></button><figcaption>Gear train</figcaption></figure>
+        <figure class="zoomable s2"><button class="zoom" type="button"><img src="projects/secme/images/generator-side.jpg" width="1200" height="1600" loading="lazy" alt="Side view of the generator with red cups mounted around a wheel on a wooden base"></button><figcaption>Water cups and base</figcaption></figure>
+        <figure class="zoomable s2 diagram"><button class="zoom" type="button"><img src="projects/secme/images/magnet-apparatus-cad.png" width="383" height="504" loading="lazy" alt="CAD model of the 4-magnet holder, a gray block with four pockets"></button><figcaption>4-magnet apparatus</figcaption></figure>
+      </div>
+    </div>
+
+    <dl class="titleblock">
+      <div><dt>Role</dt><dd>Team member: prototypes and technical drawings</dd></div>
+      <div><dt>Materials</dt><dd>Recycled and donated parts (car)</dd></div>
+      <div><dt>Outcome</dt><dd>Car: 1st of 50 schools, 3rd nationally. Generator: 3rd, 2026</dd></div>
+      <div><dt>Write-up</dt><dd><a href="https://github.com/YOUR-USERNAME/YOUR-REPO/tree/main/projects/secme">On GitHub</a></dd></div>
+    </dl>
+  </article>
+
+  <!-- ===================== PHONIX ===================== -->
+  <article class="sheet" id="phonix">
+    <header>
+      <h2>Phonix: AI-powered Phonics App</h2>
+      <p>A team project from the MIT FutureMakers Program that uses AI-powered MadLibs and flashcards, with a gamified approach, to combat teen illiteracy.</p>
+    </header>
+    <div class="row">
+      <div>
+        <ul>
+          <li>Helped develop the app as part of a team.</li>
+          <li>Conducted outreach to K-12 teachers about classroom learning through social media.</li>
+          <li>Finalist in the program’s Create-a-thon.</li>
+        </ul>
+        <p style="margin-top:1rem">Phonix was compared against ABCmouse, Starfall, Reading.com, and Flocabulary on learner targeting, AI-powered feedback, gamified learning, personalized content, and accessibility and pricing.</p>
+      </div>
+      <div class="gallery">
+        <figure class="zoomable s2 logo-tile"><button class="zoom" type="button"><img src="projects/phonix-app/images/logo.png" width="386" height="172" loading="lazy" alt="Phonix logo: a navy bird forming the letter P, with the word honix"></button><figcaption>Phonix logo</figcaption></figure>
+        <figure class="zoomable s4 diagram"><button class="zoom" type="button"><img src="projects/phonix-app/images/competitive-analysis.png" width="778" height="446" loading="lazy" alt="Competitive analysis table comparing Phonix with four other apps across five features; Phonix has a check in every row"></button><figcaption>Competitive analysis</figcaption></figure>
+      </div>
+    </div>
+    <dl class="titleblock">
+      <div><dt>Role</dt><dd>Team member: development and teacher outreach</dd></div>
+      <div><dt>Program</dt><dd>MIT FutureMakers</dd></div>
+      <div><dt>Outcome</dt><dd>Create-a-thon finalist</dd></div>
+      <div><dt>Write-up</dt><dd><a href="https://github.com/YOUR-USERNAME/YOUR-REPO/tree/main/projects/phonix-app">On GitHub</a></dd></div>
+    </dl>
+  </article>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <h2>Get in touch</h2>
+      <p>Questions about any of these builds are welcome.</p>
+    </div>
+    <ul>
+      <li><a href="mailto:YOUR-EMAIL@example.com">Email</a></li>
+      <li><a href="https://github.com/YOUR-USERNAME">GitHub</a></li>
+    </ul>
+  </div>
+</footer>
+
+<dialog id="viewer" aria-label="Image viewer">
+  <img id="viewer-img" alt="">
+  <div class="cap"><span id="viewer-cap"></span><button type="button" id="viewer-close">Close</button></div>
+</dialog>
+
+<script>
+  (function () {
+    var dlg = document.getElementById('viewer');
+    var img = document.getElementById('viewer-img');
+    var cap = document.getElementById('viewer-cap');
+    if (!dlg || typeof dlg.showModal !== 'function') return;
+
+    document.querySelectorAll('figure.zoomable').forEach(function (fig) {
+      var btn = fig.querySelector('button.zoom');
+      var pic = fig.querySelector('img');
+      var text = fig.querySelector('figcaption');
+      btn.setAttribute('aria-label', 'Enlarge: ' + (text ? text.textContent : pic.alt));
+      btn.addEventListener('click', function () {
+        img.src = pic.currentSrc || pic.src;
+        img.alt = pic.alt;
+        cap.textContent = text ? text.textContent : '';
+        dlg.showModal();
+      });
+    });
+
+    document.getElementById('viewer-close').addEventListener('click', function () { dlg.close(); });
+    dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
+  })();
+</script>
+</body>
+</html>
